@@ -19,13 +19,15 @@ endif()
 #     ADD_DEFINITIONS(-DCPPJIEBA_${ENC})
 # ENDIF()
 
-ADD_SUBDIRECTORY(deps)
-ADD_SUBDIRECTORY(test)
+if(NOT DISABLE_CPPJIEBA_TESTS)
+  ADD_SUBDIRECTORY(deps)
+  ADD_SUBDIRECTORY(test)
 
-ENABLE_TESTING()
-ADD_TEST(NAME ./test/test.run COMMAND ./test/test.run)
-ADD_TEST(NAME ./load_test COMMAND ./load_test)
-ADD_TEST(NAME ./demo COMMAND ./demo)
+  ENABLE_TESTING()
+  ADD_TEST(NAME ./test/test.run COMMAND ./test/test.run)
+  ADD_TEST(NAME ./load_test COMMAND ./load_test)
+  ADD_TEST(NAME ./demo COMMAND ./demo)
+endif()
 
 install(
   DIRECTORY ${PROJECT_SOURCE_DIR}/include/cppjieba
